@@ -15,6 +15,7 @@ import java.util.Optional;
 
 @Log4j2
 @RestController
+@CrossOrigin("http://localhost:3000")
 @RequestMapping("/product")
 public class ProductController {
     @Autowired
