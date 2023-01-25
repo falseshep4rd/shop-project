@@ -6,17 +6,18 @@ import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import org.springframework.stereotype.Component;
 
+import javax.validation.constraints.NotEmpty;
+
 @Component
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Product {
 
-    @NonNull
     private Long id;
     @NonNull
+    @NotEmpty
     private String name;
     @NonNull
     private Double price;
-
 }

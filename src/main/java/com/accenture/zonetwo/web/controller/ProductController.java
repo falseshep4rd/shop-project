@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -47,7 +48,7 @@ public class ProductController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Product> saveProduct(@RequestBody Product product, BindingResult bindingResult) throws Exception {
+    public ResponseEntity<Product> saveProduct(@Valid @RequestBody Product product, BindingResult bindingResult) throws Exception {
         log.info("Create new product by passing {}", product);
         if(bindingResult.hasErrors()) {
             log.error("New product is not created: {}", bindingResult);
@@ -76,7 +77,7 @@ public class ProductController {
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public ResponseEntity<Product> updateProductById(@NonNull @PathVariable Long id,
-                                                     @RequestBody Product product, BindingResult bindingResult) throws Exception {
+                                                     @Valid @RequestBody Product product, BindingResult bindingResult) throws Exception {
         product.setId(id);
         log.info("Update existing product with id: {} and new body: {}", id, product);
         if (bindingResult.hasErrors() || !id.equals(product.getId())) {
